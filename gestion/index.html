@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Gestión del portfolio · Giss Rodríguez</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0a0a0a;
+      --dark: #111111;
+      --dark2: #1a1a1a;
+      --line: #2a2a2a;
+      --gold: #c9a96e;
+      --gold-light: #e2c48f;
+      --cream: #f5f0e8;
+      --grey: #9a9a9a;
+      --red: #e0645c;
+      --green: #7fbf8a;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Montserrat', system-ui, sans-serif;
+      --radius: 10px;
+    }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+    button, input, select { font: inherit; color: inherit; }
+    button { cursor: pointer; }
+    img { display: block; max-width: 100%; }
+    [hidden] { display: none !important; }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+
+    /* ---------- Cabecera ---------- */
+    header {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(10,10,10,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+      padding-top: env(safe-area-inset-top);
+    }
+    .head-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0 10px; }
+    .brand { font-family: var(--font-serif); font-size: 1.5rem; color: var(--gold); line-height: 1.1; }
+    .brand small { display: block; font-family: var(--font-sans); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--grey); }
+    .head-links { display: flex; gap: 6px; }
+    .link-btn {
+      background: none; border: 1px solid var(--line); border-radius: 999px;
+      padding: 8px 14px; font-size: 0.85rem; color: var(--cream); text-decoration: none; white-space: nowrap;
+    }
+    .link-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+    .tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding-bottom: 12px; }
+    .tab {
+      background: var(--dark2); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 10px 6px; font-size: 0.9rem; font-weight: 500; color: var(--grey);
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+    }
+    .tab svg { width: 22px; height: 22px; }
+    .tab[aria-selected="true"] { border-color: var(--gold); color: var(--gold); background: rgba(201,169,110,0.08); }
+
+    main { padding: 20px 0 120px; }
+    h1 { font-family: var(--font-serif); font-weight: 400; font-size: 2rem; line-height: 1.1; margin-bottom: 6px; }
+    .lead { color: var(--grey); margin-bottom: 22px; font-size: 0.95rem; }
+
+    /* ---------- Formulario ---------- */
+    .field { margin-bottom: 22px; }
+    .label { display: block; font-weight: 600; margin-bottom: 8px; }
+    .label .step { color: var(--gold); margin-right: 6px; }
+    .hint { color: var(--grey); font-size: 0.85rem; margin-top: 6px; }
+    .input, select.input {
+      width: 100%; min-height: 50px; padding: 12px 14px;
+      background: var(--dark2); border: 1px solid var(--line); border-radius: var(--radius);
+      font-size: 1rem; color: var(--cream);
+    }
+    select.input {
+      appearance: none; -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23c9a96e' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px;
+    }
+    .input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,169,110,0.2); }
+    .input.invalid { border-color: var(--red); }
+    .error-text { color: var(--red); font-size: 0.85rem; margin-top: 6px; }
+
+    .segmented { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .segmented button {
+      min-height: 50px; background: var(--dark2); border: 1px solid var(--line); border-radius: var(--radius);
+      font-weight: 500; color: var(--grey);
+    }
+    .segmented button small { display: block; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; }
+    .segmented button[aria-pressed="true"] { border-color: var(--gold); color: var(--gold); background: rgba(201,169,110,0.08); }
+
+    .dropzone {
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+      width: 100%; min-height: 130px; padding: 20px;
+      border: 1.5px dashed rgba(201,169,110,0.5); border-radius: var(--radius);
+      background: rgba(201,169,110,0.04); color: var(--gold); text-align: center; font-weight: 500;
+    }
+    .dropzone svg { width: 34px; height: 34px; }
+    .dropzone small { color: var(--grey); font-weight: 400; font-size: 0.85rem; }
+    .dropzone.drag { background: rgba(201,169,110,0.12); }
+
+    .thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px; margin-top: 12px; }
+    .thumb { position: relative; aspect-ratio: 3/4; border-radius: 8px; overflow: hidden; background: var(--dark2); }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .thumb .bad { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 8px; text-align: center; font-size: 0.75rem; color: var(--red); background: rgba(0,0,0,0.75); }
+    .thumb-btn {
+      position: absolute; top: 6px; right: 6px; width: 36px; height: 36px; border-radius: 50%;
+      border: none; background: rgba(0,0,0,0.75); color: #fff; display: flex; align-items: center; justify-content: center;
+    }
+    .thumb-btn svg { width: 18px; height: 18px; }
+    .thumb-btn.danger { background: rgba(160,40,35,0.92); width: 44px; height: 44px; }
+    .thumb-btn.danger svg { width: 22px; height: 22px; }
+    .thumb-order { position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; padding: 6px; }
+    .thumb-order button { width: 36px; height: 36px; border-radius: 50%; border: none; background: rgba(0,0,0,0.75); color: #fff; font-size: 1.1rem; }
+    .thumb-order button:disabled { opacity: 0.25; }
+    .thumb .badge { position: absolute; left: 6px; top: 6px; font-size: 0.7rem; background: var(--gold); color: var(--black); padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 52px; padding: 12px 22px; border-radius: var(--radius);
+      border: 1px solid var(--gold); background: var(--gold); color: var(--black);
+      font-weight: 600; font-size: 1rem; letter-spacing: 0.02em;
+    }
+    .btn:disabled { opacity: 0.5; cursor: default; }
+    .btn.block { width: 100%; }
+    .btn.ghost { background: transparent; color: var(--cream); border-color: var(--line); }
+    .btn.danger { background: var(--red); border-color: var(--red); color: #fff; }
+
+    .progress { margin-top: 14px; }
+    .progress-bar { height: 6px; border-radius: 3px; background: var(--dark2); overflow: hidden; }
+    .progress-bar div { height: 100%; width: 0; background: var(--gold); transition: width 0.3s; }
+    .progress p { margin-top: 8px; font-size: 0.9rem; color: var(--grey); }
+
+    /* ---------- Listado de campañas ---------- */
+    .list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .row {
+      display: grid; grid-template-columns: auto 56px 1fr auto; align-items: center; gap: 12px;
+      padding: 10px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--dark);
+      transition: background 0.4s, border-color 0.4s;
+    }
+    .row.moved { background: rgba(201,169,110,0.12); border-color: var(--gold); }
+    .row .num { width: 26px; text-align: center; color: var(--gold); font-family: var(--font-serif); font-size: 1.2rem; }
+    .row img { width: 56px; height: 70px; object-fit: cover; border-radius: 6px; background: var(--dark2); }
+    .row .info { min-width: 0; }
+    .row .name { font-weight: 600; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .row .meta { font-size: 0.8rem; color: var(--grey); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .row .actions { display: flex; gap: 6px; }
+    .icon-btn {
+      width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: var(--dark2);
+      color: var(--cream); display: inline-flex; align-items: center; justify-content: center;
+    }
+    .icon-btn svg { width: 20px; height: 20px; }
+    .icon-btn:disabled { opacity: 0.2; cursor: default; }
+    .icon-btn:not(:disabled):hover { border-color: var(--gold); color: var(--gold); }
+    .edit-link { background: none; border: none; color: var(--gold); font-size: 0.8rem; text-decoration: underline; padding: 4px 0; }
+    @media (max-width: 420px) {
+      .row { grid-template-columns: 22px 48px 1fr auto; gap: 8px; padding: 8px; }
+      .row img { width: 48px; height: 60px; }
+      .icon-btn { width: 42px; height: 42px; }
+    }
+
+    .campaign-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; margin-bottom: 14px; background: var(--dark); }
+    .campaign-card header { position: static; background: none; border: none; backdrop-filter: none; padding: 0; display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+    .campaign-card .name { font-weight: 600; }
+    .campaign-card .meta { font-size: 0.8rem; color: var(--grey); }
+    .text-danger { background: none; border: none; color: var(--red); font-size: 0.85rem; text-decoration: underline; padding: 4px 0; white-space: nowrap; }
+
+    /* ---------- Login ---------- */
+    .login { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px 16px; }
+    .login-card { width: 100%; max-width: 380px; text-align: center; }
+    .login-card .brand { font-size: 2.2rem; margin-bottom: 4px; }
+    .login-card p { color: var(--grey); margin-bottom: 28px; }
+    .pw-wrap { position: relative; }
+    .pw-wrap .input { padding-right: 56px; }
+    .pw-toggle { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; background: none; border: none; color: var(--grey); display: flex; align-items: center; justify-content: center; }
+    .pw-toggle svg { width: 22px; height: 22px; }
+    .login-card .error-text { color: var(--red); margin: 8px 0 0; text-align: left; }
+    .check { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 16px 0 22px; color: var(--grey); font-size: 0.9rem; }
+    .check input { width: 20px; height: 20px; accent-color: var(--gold); }
+
+    /* ---------- Avisos y ventanas ---------- */
+    .toast {
+      position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom)); transform: translate(-50%, 150%);
+      width: calc(100% - 32px); max-width: 520px; z-index: 60;
+      background: var(--cream); color: var(--black); border-radius: var(--radius);
+      padding: 14px 16px; display: flex; align-items: center; gap: 12px; justify-content: space-between;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: transform 0.3s ease; font-weight: 500;
+    }
+    .toast.show { transform: translate(-50%, 0); }
+    .toast.error { background: var(--red); color: #fff; }
+    .toast button { background: none; border: none; font-weight: 700; text-decoration: underline; color: inherit; padding: 6px; white-space: nowrap; }
+
+    .save-state { font-size: 0.8rem; color: var(--grey); min-height: 1.2em; text-align: right; }
+    .save-state.ok { color: var(--green); }
+
+    .modal-back {
+      position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,0.8);
+      display: flex; align-items: flex-end; justify-content: center;
+    }
+    .modal {
+      width: 100%; max-width: 560px; max-height: 92vh; overflow-y: auto;
+      background: var(--dark); border: 1px solid var(--line); border-radius: 16px 16px 0 0;
+      padding: 22px 18px calc(22px + env(safe-area-inset-bottom));
+    }
+    @media (min-width: 600px) {
+      .modal-back { align-items: center; }
+      .modal { border-radius: 16px; }
+    }
+    .modal h2 { font-family: var(--font-serif); font-weight: 400; font-size: 1.6rem; margin-bottom: 8px; }
+    .modal p { color: var(--grey); margin-bottom: 18px; }
+    .modal .preview { width: 120px; aspect-ratio: 3/4; object-fit: cover; border-radius: 8px; margin: 0 auto 16px; }
+    .modal-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
+
+    .loading { text-align: center; padding: 60px 0; color: var(--grey); }
+    .spinner { width: 28px; height: 28px; border: 3px solid var(--line); border-top-color: var(--gold); border-radius: 50%; margin: 0 auto 12px; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== ACCESO ===================== -->
+  <section class="login" id="loginView" hidden>
+    <form class="login-card" id="loginForm" novalidate>
+      <div class="brand">Giss Rodríguez</div>
+      <p>Gestión del portfolio</p>
+      <label class="label" for="password" style="text-align:left">Contraseña</label>
+      <div class="pw-wrap">
+        <input class="input" type="password" id="password" autocomplete="current-password" required>
+        <button type="button" class="pw-toggle" id="pwToggle" aria-label="Mostrar contraseña">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </div>
+      <p class="error-text" id="loginError" hidden></p>
+      <label class="check"><input type="checkbox" id="remember" checked> Recordarme en este dispositivo</label>
+      <button class="btn block" type="submit" id="loginBtn">Entrar</button>
+    </form>
+  </section>
+
+  <!-- ===================== PANEL ===================== -->
+  <div id="appView" hidden>
+    <header>
+      <div class="wrap">
+        <div class="head-row">
+          <div class="brand">Portfolio<small>Giss Rodríguez</small></div>
+          <div class="head-links">
+            <a class="link-btn" href="/#portfolio" target="_blank" rel="noopener">Ver web</a>
+            <button class="link-btn" id="logoutBtn" type="button">Salir</button>
+          </div>
+        </div>
+        <nav class="tabs" role="tablist">
+          <button class="tab" role="tab" data-tab="new" aria-selected="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            Nuevo trabajo
+          </button>
+          <button class="tab" role="tab" data-tab="order" aria-selected="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4v16M7 4 3 8M7 4l4 4M17 20V4m0 16-4-4m4 4 4-4"/></svg>
+            Ordenar
+          </button>
+          <button class="tab" role="tab" data-tab="delete" aria-selected="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>
+            Borrar
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <div class="loading" id="loading"><div class="spinner"></div>Cargando portfolio…</div>
+
+      <!-- ---------- NUEVO TRABAJO ---------- -->
+      <section id="tab-new" hidden>
+        <h1>Nuevo trabajo</h1>
+        <p class="lead">Sube las fotos de una campaña y elige dónde colocarla en la web.</p>
+        <form id="newForm" novalidate>
+          <div class="field">
+            <span class="label"><span class="step">1</span>Fotos</span>
+            <button type="button" class="dropzone" id="dropzone">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="m21 17-5-5-8 7"/></svg>
+              Elegir fotos
+              <small>Puedes elegir varias a la vez</small>
+            </button>
+            <input type="file" id="fileInput" accept="image/*" multiple hidden>
+            <div class="thumbs" id="newThumbs"></div>
+            <p class="error-text" id="err-photos" hidden>Añade al menos una foto.</p>
+          </div>
+
+          <div class="field">
+            <label class="label" for="newName"><span class="step">2</span>Nombre de la campaña</label>
+            <input class="input" id="newName" type="text" maxlength="120" placeholder="Ej.: Zara SS27" autocomplete="off">
+            <p class="error-text" id="err-name" hidden>Escribe el nombre de la campaña.</p>
+          </div>
+
+          <div class="field">
+            <label class="label" for="newRole"><span class="step">3</span>Tu puesto</label>
+            <select class="input" id="newRole"></select>
+            <input class="input" id="newRoleOther" type="text" maxlength="80" placeholder="Escribe el puesto" style="margin-top:8px" hidden>
+            <p class="error-text" id="err-role" hidden>Elige o escribe tu puesto.</p>
+          </div>
+
+          <div class="field">
+            <span class="label"><span class="step">4</span>Tipo de trabajo</span>
+            <div class="segmented" id="newCategory">
+              <button type="button" data-value="fashion" aria-pressed="true">Moda<small>Fashion</small></button>
+              <button type="button" data-value="portraits" aria-pressed="false">Retratos<small>Portraits</small></button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="newPosition"><span class="step">5</span>¿Dónde la colocamos?</label>
+            <select class="input" id="newPosition"></select>
+            <p class="hint">Lo que está al principio es lo primero que se ve en la web.</p>
+          </div>
+
+          <button class="btn block" type="submit" id="publishBtn">Publicar trabajo</button>
+          <div class="progress" id="progress" hidden>
+            <div class="progress-bar"><div id="progressFill"></div></div>
+            <p id="progressText"></p>
+          </div>
+        </form>
+      </section>
+
+      <!-- ---------- ORDENAR ---------- -->
+      <section id="tab-order" hidden>
+        <h1>Ordenar campañas</h1>
+        <p class="lead">Usa las flechas para subir o bajar cada campaña. Los cambios se guardan solos.</p>
+        <div class="save-state" id="orderState"></div>
+        <ol class="list" id="orderList"></ol>
+      </section>
+
+      <!-- ---------- BORRAR ---------- -->
+      <section id="tab-delete" hidden>
+        <h1>Borrar fotos</h1>
+        <p class="lead">Toca la papelera de la foto que quieras quitar de la web. Siempre te pediremos confirmación.</p>
+        <div id="deleteList"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Ventana de confirmación / edición -->
+  <div class="modal-back" id="modalBack" hidden>
+    <div class="modal" id="modal" role="dialog" aria-modal="true"></div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"><span id="toastText"></span><button id="toastAction" hidden></button></div>
+
+  <script>
+  (() => {
+    'use strict';
+
+    // ===================== CONFIGURACIÓN =====================
+    const ROLES = [
+      'Make Up & Hair Artist',
+      'Make Up Artist',
+      'Hair Stylist',
+      'Make Up & Hair Assistant',
+      'Make Up Assistant',
+    ];
+    const CATEGORY_LABEL = { fashion: 'Moda', portraits: 'Retratos' };
+    const MAX_SIDE = 2000;          // píxeles del lado largo tras comprimir
+    const MAX_UPLOAD = 3.8 * 1024 * 1024;
+    const PW_KEY = 'giss-admin-pw';
+
+    // ===================== ESTADO =====================
+    let password = '';
+    let campaigns = [];
+    let etag = null;
+    let newPhotos = [];            // { file, preview, bad }
+    let newCategory = 'fashion';
+
+    // ===================== UTILIDADES =====================
+    const $ = (id) => document.getElementById(id);
+    const el = (tag, props = {}, ...children) => {
+      const node = document.createElement(tag);
+      for (const [k, v] of Object.entries(props)) {
+        if (k === 'class') node.className = v;
+        else if (k === 'text') node.textContent = v;
+        else if (k.startsWith('on')) node.addEventListener(k.slice(2), v);
+        else if (k === 'html') node.innerHTML = v; // solo con iconos propios
+        else if (v === true) node.setAttribute(k, '');
+        else if (v !== false && v != null) node.setAttribute(k, v);
+      }
+      children.flat().forEach((c) => c != null && node.append(c));
+      return node;
+    };
+    const clone = (x) => JSON.parse(JSON.stringify(x));
+    const uid = () => 'c' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    const storage = {
+      get: (k) => { try { return localStorage.getItem(k); } catch { return null; } },
+      set: (k, v) => { try { localStorage.setItem(k, v); } catch {} },
+      del: (k) => { try { localStorage.removeItem(k); } catch {} },
+    };
+    const ICON = {
+      up: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m6 15 6-6 6 6"/></svg>',
+      down: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m6 9 6 6 6-6"/></svg>',
+      trash: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 11v6M14 11v6"/></svg>',
+      close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+    };
+
+    // ===================== API =====================
+    async function api(path, options = {}) {
+      const res = await fetch(path, {
+        ...options,
+        headers: { 'x-admin-password': encodeURIComponent(password), ...(options.headers || {}) },
+      });
+      let data = null;
+      try { data = await res.json(); } catch {}
+      if (res.status === 401) { logout('La contraseña ya no es válida. Vuelve a entrar.'); throw new Error('401'); }
+      if (!res.ok) throw new Error((data && data.error) || 'Algo ha fallado. Inténtalo de nuevo.');
+      return data;
+    }
+
+    async function loadPortfolio() {
+      const data = await api('/api/portfolio?admin=' + Date.now());
+      campaigns = data.campaigns;
+      etag = data.etag;
+    }
+
+    // Guarda en orden: cada guardado espera al anterior (así nunca se pisan).
+    let saveChain = Promise.resolve();
+    function saveNow() {
+      const snapshot = clone(campaigns);
+      const run = saveChain.catch(() => {}).then(async () => {
+        const data = await api('/api/portfolio', {
+          method: 'PUT',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ campaigns: snapshot, etag }),
+        });
+        etag = data.etag;
+      });
+      saveChain = run;
+      return run.catch(async (err) => {
+        if (err.message !== '401') {
+          toast(err.message, { error: true });
+          try { await loadPortfolio(); renderAll(); } catch {}
+        }
+        throw err;
+      });
+    }
+
+    // Para ordenar: esperamos un momento por si da varios toques seguidos.
+    let orderTimer;
+    function saveOrderSoon() {
+      const state = $('orderState');
+      state.className = 'save-state';
+      state.textContent = 'Guardando…';
+      clearTimeout(orderTimer);
+      orderTimer = setTimeout(() => {
+        saveNow().then(() => {
+          state.className = 'save-state ok';
+          state.textContent = 'Guardado ✓ · En la web en menos de un minuto';
+        }).catch(() => { state.textContent = ''; });
+      }, 700);
+    }
+
+    // ===================== ACCESO =====================
+    async function tryLogin(pw) {
+      const res = await fetch('/api/auth', { method: 'POST', headers: { 'x-admin-password': encodeURIComponent(pw) } });
+      if (res.ok) return true;
+      const data = await res.json().catch(() => ({}));
+      const err = new Error(res.status === 401 ? 'Contraseña incorrecta' : (data.error || 'No se ha podido comprobar. Revisa la conexión.'));
+      err.status = res.status;
+      throw err;
+    }
+
+    async function enterApp() {
+      $('loginView').hidden = true;
+      $('appView').hidden = false;
+      $('loading').hidden = false;
+      try {
+        await loadPortfolio();
+        $('loading').hidden = true;
+        renderAll();
+        showTab(location.hash.replace('#', '') || 'new');
+      } catch (err) {
+        if (err.message !== '401') $('loading').textContent = 'No se ha podido cargar el portfolio. Recarga la página.';
+      }
+    }
+
+    function logout(message) {
+      password = '';
+      storage.del(PW_KEY);
+      $('appView').hidden = true;
+      $('loginView').hidden = false;
+      $('password').value = '';
+      const err = $('loginError');
+      err.hidden = !message;
+      err.textContent = message || '';
+    }
+
+    $('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const pw = $('password').value;
+      const err = $('loginError');
+      if (!pw) { err.hidden = false; err.textContent = 'Escribe la contraseña.'; return; }
+      $('loginBtn').disabled = true;
+      $('loginBtn').textContent = 'Comprobando…';
+      try {
+        await tryLogin(pw);
+        password = pw;
+        if ($('remember').checked) storage.set(PW_KEY, pw); else storage.del(PW_KEY);
+        err.hidden = true;
+        enterApp();
+      } catch (ex) {
+        err.hidden = false;
+        err.textContent = ex.message;
+      } finally {
+        $('loginBtn').disabled = false;
+        $('loginBtn').textContent = 'Entrar';
+      }
+    });
+
+    $('pwToggle').addEventListener('click', () => {
+      const input = $('password');
+      input.type = input.type === 'password' ? 'text' : 'password';
+    });
+    $('logoutBtn').addEventListener('click', () => logout());
+
+    // ===================== PESTAÑAS =====================
+    function showTab(name) {
+      if (!['new', 'order', 'delete'].includes(name)) name = 'new';
+      document.querySelectorAll('.tab').forEach((t) => t.setAttribute('aria-selected', t.dataset.tab === name));
+      ['new', 'order', 'delete'].forEach((t) => { $('tab-' + t).hidden = t !== name; });
+      history.replaceState(null, '', '#' + name);
+      window.scrollTo(0, 0);
+    }
+    document.querySelectorAll('.tab').forEach((t) => t.addEventListener('click', () => showTab(t.dataset.tab)));
+
+    // ===================== AVISOS =====================
+    let toastTimer;
+    function toast(text, { error = false, action, onAction, duration = 5000 } = {}) {
+      const t = $('toast');
+      $('toastText').textContent = text;
+      t.classList.toggle('error', error);
+      const btn = $('toastAction');
+      btn.hidden = !action;
+      btn.textContent = action || '';
+      btn.onclick = () => { t.classList.remove('show'); onAction && onAction(); };
+      t.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove('show'), error ? 8000 : duration);
+    }
+
+    function openModal(content) {
+      $('toast').classList.remove('show');
+      const m = $('modal');
+      m.replaceChildren(...content);
+      $('modalBack').hidden = false;
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      $('modalBack').hidden = true;
+      document.body.style.overflow = '';
+    }
+    $('modalBack').addEventListener('click', (e) => { if (e.target === $('modalBack')) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('modalBack').hidden) closeModal(); });
+
+    function confirmDialog({ title, text, image, confirmLabel = 'Borrar', danger = true }) {
+      return new Promise((resolve) => {
+        const done = (v) => { closeModal(); resolve(v); };
+        openModal([
+          image ? el('img', { class: 'preview', src: image, alt: '' }) : null,
+          el('h2', { text: title }),
+          el('p', { text }),
+          el('div', { class: 'modal-actions' },
+            el('button', { class: 'btn ghost', type: 'button', text: 'Cancelar', onclick: () => done(false) }),
+            el('button', { class: 'btn ' + (danger ? 'danger' : ''), type: 'button', text: confirmLabel, onclick: () => done(true) }),
+          ),
+        ].filter(Boolean));
+      });
+    }
+
+    // ===================== COMPRESIÓN DE FOTOS =====================
+    function loadImage(file) {
+      return new Promise((resolve, reject) => {
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+        img.onload = () => { resolve(img); };
+        img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('unreadable')); };
+        img.src = url;
+      });
+    }
+
+    async function toBlob(canvas, type, quality) {
+      return new Promise((resolve) => canvas.toBlob(resolve, type, quality));
+    }
+
+    // Reduce la foto a un tamaño de web y la pasa a WebP (o JPG si el navegador no sabe hacer WebP).
+    async function compress(file) {
+      let source;
+      try {
+        source = await createImageBitmap(file, { imageOrientation: 'from-image' });
+      } catch {
+        source = await loadImage(file); // lanza error si el formato no se puede leer (p. ej. HEIC en Chrome)
+      }
+      const w = source.width || source.naturalWidth;
+      const h = source.height || source.naturalHeight;
+      const scale = Math.min(1, MAX_SIDE / Math.max(w, h));
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.round(w * scale);
+      canvas.height = Math.round(h * scale);
+      canvas.getContext('2d').drawImage(source, 0, 0, canvas.width, canvas.height);
+      if (source.close) source.close();
+
+      let blob = await toBlob(canvas, 'image/webp', 0.82);
+      let type = 'image/webp';
+      if (!blob || blob.type !== 'image/webp') { type = 'image/jpeg'; blob = await toBlob(canvas, type, 0.85); }
+      for (let q = 0.75; blob && blob.size > MAX_UPLOAD && q > 0.4; q -= 0.1) blob = await toBlob(canvas, type, q);
+      if (!blob) throw new Error('unreadable');
+      return blob;
+    }
+
+    async function uploadPhoto(file, name) {
+      let blob;
+      try { blob = await compress(file); }
+      catch { throw new Error(`No se puede leer «${file.name}». Guárdala como JPG y vuelve a intentarlo.`); }
+      const send = () => api('/api/upload?name=' + encodeURIComponent(name), {
+        method: 'POST', headers: { 'content-type': blob.type }, body: blob,
+      });
+      try { return (await send()).url; }
+      catch (err) { if (err.message === '401') throw err; return (await send()).url; } // un reintento
+    }
+
+    // Selector de fotos reutilizable: añade previsualizaciones a una lista.
+    function addFiles(list, files, rerender) {
+      Array.from(files).forEach((file) => {
+        if (!file.type.startsWith('image/') && !/\.(heic|heif)$/i.test(file.name)) return;
+        const entry = { file, preview: URL.createObjectURL(file), bad: false };
+        list.push(entry);
+      });
+      rerender();
+    }
+
+    function renderPendingThumbs(container, list, rerender) {
+      container.replaceChildren(...list.map((entry, i) => {
+        const img = el('img', { src: entry.preview, alt: '' });
+        img.addEventListener('error', () => { entry.bad = true; rerender(); }, { once: true });
+        return el('div', { class: 'thumb' },
+          entry.bad ? null : img,
+          entry.bad ? el('div', { class: 'bad', text: 'Formato no compatible. Guárdala como JPG.' }) : null,
+          el('button', {
+            class: 'thumb-btn', type: 'button', 'aria-label': 'Quitar esta foto', html: ICON.close,
+            onclick: () => { URL.revokeObjectURL(entry.preview); list.splice(i, 1); rerender(); },
+          }),
+        );
+      }));
+    }
+
+    // ===================== PINTAR TODO =====================
+    function renderAll() {
+      renderRoleSelect($('newRole'), $('newRoleOther'));
+      renderPositionSelect();
+      renderOrder();
+      renderDelete();
+    }
+
+    function allRoles() {
+      const set = new Set(ROLES);
+      campaigns.forEach((c) => set.add(c.role));
+      return [...set];
+    }
+
+    function renderRoleSelect(select, other, current) {
+      const prev = current ?? select.value;
+      select.replaceChildren(
+        el('option', { value: '', text: 'Elige tu puesto…' }),
+        ...allRoles().map((r) => el('option', { value: r, text: r })),
+        el('option', { value: '__other', text: 'Otro (escribirlo)…' }),
+      );
+      if (prev && allRoles().includes(prev)) select.value = prev;
+      else if (prev === '__other') select.value = '__other';
+      other.hidden = select.value !== '__other';
+      select.onchange = () => {
+        other.hidden = select.value !== '__other';
+        if (!other.hidden) other.focus();
+      };
+    }
+    const readRole = (select, other) => (select.value === '__other' ? other.value.trim() : select.value);
+
+    function renderPositionSelect() {
+      const select = $('newPosition');
+      const prev = select.value;
+      select.replaceChildren(
+        el('option', { value: '0', text: 'Al principio — lo primero que se ve' }),
+        ...campaigns.map((c, i) => el('option', { value: String(i + 1), text: `Después de ${i + 1}. ${c.name}` })),
+      );
+      select.value = prev && Number(prev) <= campaigns.length ? prev : '0';
+    }
+
+    // ---------- Nuevo trabajo ----------
+    const rerenderNew = () => renderPendingThumbs($('newThumbs'), newPhotos, rerenderNew);
+    $('dropzone').addEventListener('click', () => $('fileInput').click());
+    $('fileInput').addEventListener('change', (e) => { addFiles(newPhotos, e.target.files, rerenderNew); e.target.value = ''; $('err-photos').hidden = true; });
+    ['dragenter', 'dragover'].forEach((ev) => $('dropzone').addEventListener(ev, (e) => { e.preventDefault(); $('dropzone').classList.add('drag'); }));
+    ['dragleave', 'drop'].forEach((ev) => $('dropzone').addEventListener(ev, () => $('dropzone').classList.remove('drag')));
+    $('dropzone').addEventListener('drop', (e) => { e.preventDefault(); addFiles(newPhotos, e.dataTransfer.files, rerenderNew); });
+
+    function bindSegmented(container, onChange) {
+      container.querySelectorAll('button').forEach((b) => b.addEventListener('click', () => {
+        container.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b));
+        onChange(b.dataset.value);
+      }));
+    }
+    function setSegmented(container, value) {
+      container.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x.dataset.value === value));
+    }
+    bindSegmented($('newCategory'), (v) => { newCategory = v; });
+    $('newName').addEventListener('input', () => { $('err-name').hidden = true; $('newName').classList.remove('invalid'); });
+    $('newRole').addEventListener('input', () => { $('err-role').hidden = true; });
+    $('newRoleOther').addEventListener('input', () => { $('err-role').hidden = true; });
+
+    function setProgress(done, total, text) {
+      $('progress').hidden = false;
+      $('progressFill').style.width = (total ? (done / total) * 100 : 0) + '%';
+      $('progressText').textContent = text;
+    }
+
+    $('newForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = $('newName').value.trim();
+      const role = readRole($('newRole'), $('newRoleOther'));
+      const photos = newPhotos.filter((p) => !p.bad);
+      $('err-photos').hidden = photos.length > 0;
+      $('err-name').hidden = !!name;
+      $('err-role').hidden = !!role;
+      $('newName').classList.toggle('invalid', !name);
+      if (!photos.length || !name || !role) {
+        const firstError = document.querySelector('#newForm .error-text:not([hidden])');
+        firstError && firstError.parentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      const btn = $('publishBtn');
+      btn.disabled = true;
+      btn.textContent = 'Publicando…';
+      const urls = [];
+      try {
+        for (let i = 0; i < photos.length; i++) {
+          setProgress(i, photos.length, `Subiendo foto ${i + 1} de ${photos.length}…`);
+          urls.push(await uploadPhoto(photos[i].file, name));
+        }
+        setProgress(photos.length, photos.length, 'Guardando en la web…');
+        const position = Math.min(Number($('newPosition').value) || 0, campaigns.length);
+        campaigns.splice(position, 0, {
+          id: uid(), name, role, category: newCategory, photos: urls.map((url) => ({ url })),
+        });
+        await saveNow();
+        newPhotos.forEach((p) => URL.revokeObjectURL(p.preview));
+        newPhotos = [];
+        $('newForm').reset();
+        newCategory = 'fashion';
+        setSegmented($('newCategory'), 'fashion');
+        rerenderNew();
+        renderAll();
+        $('progress').hidden = true;
+        toast(`«${name}» publicada. Se verá en la web en menos de un minuto.`);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (err) {
+        if (err.message !== '401') {
+          $('progressText').textContent = err.message;
+          toast(err.message, { error: true });
+        }
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Publicar trabajo';
+      }
+    });
+
+    // ---------- Ordenar ----------
+    function move(index, dir) {
+      const to = index + dir;
+      if (to < 0 || to >= campaigns.length) return;
+      const [item] = campaigns.splice(index, 1);
+      campaigns.splice(to, 0, item);
+      renderOrder(item.id);
+      renderPositionSelect();
+      saveOrderSoon();
+    }
+
+    function renderOrder(highlightId) {
+      const list = $('orderList');
+      list.replaceChildren(...campaigns.map((c, i) => {
+        const li = el('li', { class: 'row' + (c.id === highlightId ? ' moved' : ''), 'data-id': c.id },
+          el('span', { class: 'num', text: String(i + 1) }),
+          el('img', { src: c.photos[0].url, alt: '', loading: 'lazy' }),
+          el('div', { class: 'info' },
+            el('div', { class: 'name', text: c.name }),
+            el('div', { class: 'meta', text: `${c.role} · ${CATEGORY_LABEL[c.category]} · ${c.photos.length} foto${c.photos.length === 1 ? '' : 's'}` }),
+            el('button', { class: 'edit-link', type: 'button', text: 'Editar', onclick: () => openEdit(c.id) }),
+          ),
+          el('div', { class: 'actions' },
+            el('button', { class: 'icon-btn', type: 'button', 'aria-label': `Subir ${c.name}`, html: ICON.up, disabled: i === 0, onclick: () => move(i, -1) }),
+            el('button', { class: 'icon-btn', type: 'button', 'aria-label': `Bajar ${c.name}`, html: ICON.down, disabled: i === campaigns.length - 1, onclick: () => move(i, 1) }),
+          ),
+        );
+        return li;
+      }));
+      if (highlightId) {
+        const row = list.querySelector(`[data-id="${CSS.escape(highlightId)}"]`);
+        if (row) {
+          row.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+          setTimeout(() => row.classList.remove('moved'), 900);
+        }
+      }
+    }
+
+    // ---------- Editar campaña ----------
+    function openEdit(id) {
+      const original = campaigns.find((c) => c.id === id);
+      if (!original) return;
+      const draft = clone(original);
+      const extra = []; // fotos nuevas pendientes de subir
+
+      const nameInput = el('input', { class: 'input', type: 'text', maxlength: '120', value: draft.name });
+      const roleSelect = el('select', { class: 'input' });
+      const roleOther = el('input', { class: 'input', type: 'text', maxlength: '80', placeholder: 'Escribe el puesto', style: 'margin-top:8px' });
+      renderRoleSelect(roleSelect, roleOther, draft.role);
+      const cat = el('div', { class: 'segmented' },
+        el('button', { type: 'button', 'data-value': 'fashion', 'aria-pressed': String(draft.category === 'fashion') }, 'Moda', el('small', { text: 'Fashion' })),
+        el('button', { type: 'button', 'data-value': 'portraits', 'aria-pressed': String(draft.category === 'portraits') }, 'Retratos', el('small', { text: 'Portraits' })),
+      );
+      bindSegmented(cat, (v) => { draft.category = v; });
+
+      const photosBox = el('div', { class: 'thumbs' });
+      const extraBox = el('div', { class: 'thumbs' });
+      const fileInput = el('input', { type: 'file', accept: 'image/*', multiple: true, hidden: true });
+      const rerenderExtra = () => renderPendingThumbs(extraBox, extra, rerenderExtra);
+      fileInput.addEventListener('change', () => { addFiles(extra, fileInput.files, rerenderExtra); fileInput.value = ''; });
+
+      const renderPhotos = () => {
+        photosBox.replaceChildren(...draft.photos.map((p, i) => el('div', { class: 'thumb' },
+          el('img', { src: p.url, alt: '', loading: 'lazy' }),
+          i === 0 ? el('span', { class: 'badge', text: 'Primera' }) : null,
+          el('div', { class: 'thumb-order' },
+            el('button', { type: 'button', text: '←', 'aria-label': 'Mover antes', disabled: i === 0, onclick: () => { draft.photos.splice(i - 1, 0, draft.photos.splice(i, 1)[0]); renderPhotos(); } }),
+            el('button', { type: 'button', text: '→', 'aria-label': 'Mover después', disabled: i === draft.photos.length - 1, onclick: () => { draft.photos.splice(i + 1, 0, draft.photos.splice(i, 1)[0]); renderPhotos(); } }),
+          ),
+        )));
+      };
+      renderPhotos();
+
+      const status = el('p', { class: 'hint' });
+      const saveBtn = el('button', { class: 'btn', type: 'button', text: 'Guardar' });
+      saveBtn.addEventListener('click', async () => {
+        const name = nameInput.value.trim();
+        const role = readRole(roleSelect, roleOther);
+        if (!name || !role) { status.textContent = 'Falta el nombre o el puesto.'; status.style.color = 'var(--red)'; return; }
+        saveBtn.disabled = true;
+        saveBtn.textContent = 'Guardando…';
+        status.style.color = '';
+        try {
+          const pending = extra.filter((p) => !p.bad);
+          for (let i = 0; i < pending.length; i++) {
+            status.textContent = `Subiendo foto ${i + 1} de ${pending.length}…`;
+            draft.photos.push({ url: await uploadPhoto(pending[i].file, name) });
+          }
+          const index = campaigns.findIndex((c) => c.id === id);
+          if (index === -1) throw new Error('Esta campaña ya no existe. Recarga la página.');
+          campaigns[index] = { ...draft, name, role };
+          await saveNow();
+          extra.forEach((p) => URL.revokeObjectURL(p.preview));
+          closeModal();
+          renderAll();
+          toast('Cambios guardados. Se verán en la web en menos de un minuto.');
+        } catch (err) {
+          if (err.message !== '401') { status.textContent = err.message; status.style.color = 'var(--red)'; }
+          saveBtn.disabled = false;
+          saveBtn.textContent = 'Guardar';
+        }
+      });
+
+      openModal([
+        el('h2', { text: 'Editar campaña' }),
+        el('div', { class: 'field' }, el('label', { class: 'label', text: 'Nombre' }), nameInput),
+        el('div', { class: 'field' }, el('label', { class: 'label', text: 'Puesto' }), roleSelect, roleOther),
+        el('div', { class: 'field' }, el('span', { class: 'label', text: 'Tipo de trabajo' }), cat),
+        el('div', { class: 'field' },
+          el('span', { class: 'label', text: 'Orden de las fotos' }),
+          el('p', { class: 'hint', text: 'Usa las flechas para cambiar el orden. Para quitar fotos, ve a «Borrar».' }),
+          photosBox,
+        ),
+        el('div', { class: 'field' },
+          el('button', { class: 'btn ghost block', type: 'button', text: '+ Añadir más fotos', onclick: () => fileInput.click() }),
+          fileInput, extraBox,
+        ),
+        status,
+        el('div', { class: 'modal-actions' },
+          el('button', { class: 'btn ghost', type: 'button', text: 'Cancelar', onclick: () => { extra.forEach((p) => URL.revokeObjectURL(p.preview)); closeModal(); } }),
+          saveBtn,
+        ),
+      ]);
+    }
+
+    // ---------- Borrar ----------
+    async function removeWithUndo(mutate, message) {
+      const before = clone(campaigns);
+      mutate();
+      renderAll();
+      try {
+        await saveNow();
+        toast(message, {
+          action: 'Deshacer',
+          duration: 10000,
+          onAction: async () => {
+            campaigns = before;
+            renderAll();
+            try { await saveNow(); toast('Recuperado.'); } catch {}
+          },
+        });
+      } catch {}
+    }
+
+    async function deletePhoto(campaignId, photoIndex) {
+      const c = campaigns.find((x) => x.id === campaignId);
+      if (!c) return;
+      const photo = c.photos[photoIndex];
+      const isLast = c.photos.length === 1;
+      const ok = await confirmDialog({
+        title: '¿Borrar esta foto?',
+        text: isLast
+          ? `Es la única foto de «${c.name}», así que la campaña desaparecerá de la web.`
+          : `Se quitará de «${c.name}» en la web.`,
+        image: photo.url,
+      });
+      if (!ok) return;
+      await removeWithUndo(() => {
+        const current = campaigns.find((x) => x.id === campaignId);
+        const idx = current.photos.findIndex((p) => p.url === photo.url);
+        if (idx > -1) current.photos.splice(idx, 1);
+        if (!current.photos.length) campaigns = campaigns.filter((x) => x.id !== campaignId);
+      }, isLast ? `Foto y campaña «${c.name}» borradas.` : 'Foto borrada.');
+    }
+
+    async function deleteCampaign(campaignId) {
+      const c = campaigns.find((x) => x.id === campaignId);
+      if (!c) return;
+      const ok = await confirmDialog({
+        title: '¿Borrar la campaña entera?',
+        text: `Se quitarán de la web las ${c.photos.length} fotos de «${c.name}».`,
+        image: c.photos[0].url,
+        confirmLabel: 'Borrar todo',
+      });
+      if (!ok) return;
+      await removeWithUndo(() => { campaigns = campaigns.filter((x) => x.id !== campaignId); }, `Campaña «${c.name}» borrada.`);
+    }
+
+    function renderDelete() {
+      $('deleteList').replaceChildren(...campaigns.map((c) => el('div', { class: 'campaign-card' },
+        el('header', {},
+          el('div', {},
+            el('div', { class: 'name', text: c.name }),
+            el('div', { class: 'meta', text: `${c.role} · ${c.photos.length} foto${c.photos.length === 1 ? '' : 's'}` }),
+          ),
+          c.photos.length > 1
+            ? el('button', { class: 'text-danger', type: 'button', text: 'Borrar campaña', onclick: () => deleteCampaign(c.id) })
+            : null,
+        ),
+        el('div', { class: 'thumbs' }, ...c.photos.map((p, i) => el('div', { class: 'thumb' },
+          el('img', { src: p.url, alt: `${c.name}, foto ${i + 1}`, loading: 'lazy' }),
+          el('button', { class: 'thumb-btn danger', type: 'button', 'aria-label': `Borrar foto ${i + 1} de ${c.name}`, html: ICON.trash, onclick: () => deletePhoto(c.id, i) }),
+        ))),
+      )));
+    }
+
+    // Aviso si intenta salir con fotos elegidas sin publicar.
+    window.addEventListener('beforeunload', (e) => {
+      if (newPhotos.length) { e.preventDefault(); e.returnValue = ''; }
+    });
+
+    // ===================== INICIO =====================
+    (async () => {
+      const saved = storage.get(PW_KEY);
+      if (saved) {
+        try { await tryLogin(saved); password = saved; return enterApp(); }
+        catch (err) { if (err.status === 401) storage.del(PW_KEY); }
+      }
+      $('loginView').hidden = false;
+      $('password').focus();
+    })();
+  })();
+  </script>
+</body>
+</html>
