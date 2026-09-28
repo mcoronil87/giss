@@ -68,7 +68,7 @@
     .tab svg { width: 22px; height: 22px; }
     .tab[aria-selected="true"] { border-color: var(--gold); color: var(--gold); background: rgba(201,169,110,0.08); }
 
-    main { padding: 20px 0 120px; }
+    main.wrap { padding: 48px 16px calc(64px + env(safe-area-inset-bottom)); }
     h1 { font-family: var(--font-serif); font-weight: 400; font-size: 2rem; line-height: 1.1; margin-bottom: 6px; }
     .lead { color: var(--grey); margin-bottom: 22px; font-size: 0.95rem; }
 
@@ -173,6 +173,7 @@
     .campaign-card header { position: static; background: none; border: none; backdrop-filter: none; padding: 0; display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
     .campaign-card .name { font-weight: 600; }
     .campaign-card .meta { font-size: 0.8rem; color: var(--grey); }
+    .danger-zone { margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--line); text-align: center; }
     .text-danger { background: none; border: none; color: var(--red); font-size: 0.85rem; text-decoration: underline; padding: 4px 0; white-space: nowrap; }
 
     /* ---------- Login ---------- */
@@ -190,13 +191,13 @@
 
     /* ---------- Avisos y ventanas ---------- */
     .toast {
-      position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom)); transform: translate(-50%, 150%);
+      position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom)); transform: translate(-50%, calc(100% + 40px)); visibility: hidden;
       width: calc(100% - 32px); max-width: 520px; z-index: 60;
       background: var(--cream); color: var(--black); border-radius: var(--radius);
       padding: 14px 16px; display: flex; align-items: center; gap: 12px; justify-content: space-between;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: transform 0.3s ease; font-weight: 500;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: transform 0.3s ease, visibility 0.3s; font-weight: 500;
     }
-    .toast.show { transform: translate(-50%, 0); }
+    .toast.show { transform: translate(-50%, 0); visibility: visible; }
     .toast.error { background: var(--red); color: #fff; }
     .toast button { background: none; border: none; font-weight: 700; text-decoration: underline; color: inherit; padding: 6px; white-space: nowrap; }
 
@@ -264,7 +265,7 @@
           </button>
           <button class="tab" role="tab" data-tab="order" aria-selected="false">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4v16M7 4 3 8M7 4l4 4M17 20V4m0 16-4-4m4 4 4-4"/></svg>
-            Ordenar
+            Ordenar y editar
           </button>
           <button class="tab" role="tab" data-tab="delete" aria-selected="false">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>
@@ -331,8 +332,8 @@
 
       <!-- ---------- ORDENAR ---------- -->
       <section id="tab-order" hidden>
-        <h1>Ordenar campañas</h1>
-        <p class="lead">Usa las flechas para subir o bajar cada campaña. Los cambios se guardan solos.</p>
+        <h1>Ordenar y editar</h1>
+        <p class="lead">Usa las flechas para subir o bajar cada campaña; los cambios se guardan solos. Toca «Editar» para cambiar el nombre, el puesto o las fotos, o para borrar la campaña.</p>
         <div class="save-state" id="orderState"></div>
         <ol class="list" id="orderList"></ol>
       </section>
@@ -364,6 +365,7 @@
       'Hair Stylist',
       'Make Up & Hair Assistant',
       'Make Up Assistant',
+      'Make Up Assistant & Manicure',
     ];
     const CATEGORY_LABEL = { fashion: 'Moda', portraits: 'Retratos' };
     const MAX_SIDE = 2000;          // píxeles del lado largo tras comprimir
@@ -663,11 +665,8 @@
       renderDelete();
     }
 
-    function allRoles() {
-      const set = new Set(ROLES);
-      campaigns.forEach((c) => set.add(c.role));
-      return [...set];
-    }
+    // Solo los puestos de la lista; si una campaña tiene otro, se muestra en «Otro».
+    const allRoles = () => ROLES;
 
     function renderRoleSelect(select, other, current) {
       const prev = current ?? select.value;
@@ -678,6 +677,7 @@
       );
       if (prev && allRoles().includes(prev)) select.value = prev;
       else if (prev === '__other') select.value = '__other';
+      else if (prev) { select.value = '__other'; other.value = prev; }
       other.hidden = select.value !== '__other';
       select.onchange = () => {
         other.hidden = select.value !== '__other';
@@ -896,6 +896,12 @@
         el('div', { class: 'modal-actions' },
           el('button', { class: 'btn ghost', type: 'button', text: 'Cancelar', onclick: () => { extra.forEach((p) => URL.revokeObjectURL(p.preview)); closeModal(); } }),
           saveBtn,
+        ),
+        el('div', { class: 'danger-zone' },
+          el('button', {
+            class: 'text-danger', type: 'button', text: 'Borrar esta campaña entera',
+            onclick: () => { extra.forEach((p) => URL.revokeObjectURL(p.preview)); closeModal(); deleteCampaign(id); },
+          }),
         ),
       ]);
     }
