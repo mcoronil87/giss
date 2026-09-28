@@ -688,6 +688,31 @@
       color: var(--gold);
       border-bottom-color: var(--gold);
     }
+    /* ===================== COMPARTIR ===================== */
+    .share-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: none; border: none; cursor: pointer;
+      color: var(--gold); font-family: var(--font-sans);
+      font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 10px 4px; transition: color var(--transition);
+    }
+    .share-btn:hover { color: var(--gold-light); }
+    .cv-tabs .share-btn { margin-left: auto; margin-bottom: -1px; }
+    .lightbox-caption .share-btn { margin-top: 6px; }
+    .cv-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 48px; }
+    .cv-actions .cv-download { margin-top: 0; }
+    .site-toast {
+      position: fixed; left: 50%; bottom: 24px; z-index: 300;
+      transform: translate(-50%, 20px); opacity: 0; pointer-events: none;
+      background: var(--cream); color: var(--black);
+      font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 12px 20px; transition: all 0.3s ease;
+    }
+    .site-toast.show { transform: translate(-50%, 0); opacity: 1; }
+    @media (max-width: 600px) {
+      .cv-tabs .share-btn .share-label { display: none; }
+      .cv-tabs .share-btn { padding: 10px 8px; }
+    }
     .cv-tab-panel { display: none; }
     .cv-tab-panel.active { display: block; }
     .cv-edu-grid {
@@ -942,6 +967,10 @@
         <span data-lang="en" class="lang-inline">Education</span>
         <span data-lang="es" class="visible lang-inline">Titulaciones</span>
       </button>
+      <button class="share-btn" id="cvShare" type="button" aria-label="Compartir esta sección del CV">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+        <span class="share-label"><span data-lang="en" class="lang-inline">Share</span><span data-lang="es" class="visible lang-inline">Compartir</span></span>
+      </button>
     </div>
 
     <!-- El CV se carga desde /api/cv (se gestiona en /gestion) -->
@@ -957,13 +986,20 @@
       <div class="cv-edu-grid" id="cvEducation"></div>
     </div>
 
-    <a class="cv-download" style="margin-top:48px;" href="/api/cv-pdf" download="cv-giss-rodriguez.pdf">
+    <div class="cv-actions">
+    <a class="cv-download" href="/cv.pdf" download="cv-giss-rodriguez.pdf">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
       </svg>
       <span data-lang="en" class="lang-inline">Download CV</span>
       <span data-lang="es" class="visible lang-inline">Descargar CV</span>
     </a>
+    <button class="cv-download" id="pdfShare" type="button">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+      <span data-lang="en" class="lang-inline">Share CV (PDF)</span>
+      <span data-lang="es" class="visible lang-inline">Compartir CV (PDF)</span>
+    </button>
+    </div>
   </section>
 
   <!-- CONTACT -->
@@ -1038,8 +1074,16 @@
     <div class="lightbox-caption">
       <p id="lightboxProject"></p>
       <span id="lightboxRole"></span>
+      <div>
+        <button class="share-btn" id="lightboxShare" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+          <span data-lang="en" class="lang-inline">Share</span><span data-lang="es" class="visible lang-inline">Compartir</span>
+        </button>
+      </div>
     </div>
   </div>
+
+  <div class="site-toast" id="siteToast" role="status" aria-live="polite"></div>
 
   <script>
     // ===================== LANGUAGE TOGGLE =====================
@@ -1074,7 +1118,8 @@
     });
 
     // Init language
-    setLang('es');
+    // Idioma inicial: el del enlace (?lang=en) o español
+    setLang(new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : 'es');
 
     // ===================== NAV SCROLL =====================
     const navbar = document.getElementById('navbar');
@@ -1152,6 +1197,7 @@
           item.dataset.category = c.category;
           item.dataset.project = c.name;
           item.dataset.role = c.role;
+          item.dataset.photoId = photoId(photo.url);
           const img = document.createElement('img');
           img.src = photo.url;
           img.alt = c.name;
@@ -1174,6 +1220,7 @@
       portfolioGrid.replaceChildren(frag);
       portfolioGrid.removeAttribute('aria-busy');
       applyFilter(currentFilter);
+      openFromHash();
     }
 
     fetchPortfolio().then(renderPortfolio);
@@ -1212,7 +1259,8 @@
           item,
           src: item.querySelector('img').src,
           project: item.dataset.project,
-          role: item.dataset.role
+          role: item.dataset.role,
+          id: item.dataset.photoId
         }));
     }
 
@@ -1243,6 +1291,7 @@
       lightboxImg.alt = data.project;
       lightboxProject.textContent = data.project;
       lightboxRole.textContent = data.role;
+      document.getElementById('lightboxShare').dataset.photoId = data.id;
     }
 
     function stepLightbox(direction) {
@@ -1297,6 +1346,91 @@
         }
       });
     });
+
+    // ===================== COMPARTIR =====================
+    // Mismo cálculo que api/_share.js (si se cambia uno, hay que cambiar el otro).
+    function photoId(url) {
+      let h = 0x811c9dc5;
+      for (let i = 0; i < url.length; i++) {
+        h ^= url.charCodeAt(i);
+        h = Math.imul(h, 0x01000193) >>> 0;
+      }
+      return h.toString(36);
+    }
+
+    const CV_SLUGS = { cine: 'cine', moda: 'moda', edu: 'formacion' };
+    const CV_NAMES = {
+      cine: { es: 'Cine y TV', en: 'Film & TV' },
+      moda: { es: 'Moda y Publicidad', en: 'Fashion & Advertising' },
+      edu: { es: 'Titulaciones', en: 'Education' },
+    };
+    const withLang = (path) => location.origin + path + (currentLang === 'en' ? '?lang=en' : '');
+
+    let toastTimer;
+    function siteToast(text) {
+      const t = document.getElementById('siteToast');
+      t.textContent = text;
+      t.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+    }
+
+    // En el móvil abre el menú de compartir del teléfono; si no hay, copia el enlace.
+    async function shareLink(title, url) {
+      if (navigator.share) {
+        try { await navigator.share({ title, url }); return; }
+        catch (e) { if (e && e.name === 'AbortError') return; }
+      }
+      try {
+        await navigator.clipboard.writeText(url);
+        siteToast(currentLang === 'en' ? 'Link copied' : 'Enlace copiado');
+      } catch (e) {
+        window.prompt(currentLang === 'en' ? 'Copy this link:' : 'Copia este enlace:', url);
+      }
+    }
+
+    document.getElementById('lightboxShare').addEventListener('click', (e) => {
+      e.stopPropagation();
+      const id = e.currentTarget.dataset.photoId;
+      shareLink(`${lightboxProject.textContent} · Giss Rodríguez`, withLang('/foto/' + id));
+    });
+
+    document.getElementById('cvShare').addEventListener('click', () => {
+      const active = document.querySelector('.cv-tab-btn.active');
+      const tab = active ? active.dataset.tab : 'cine';
+      shareLink(`Giss Rodríguez · CV ${CV_NAMES[tab][currentLang]}`, withLang('/cv/' + CV_SLUGS[tab]));
+    });
+
+    document.getElementById('pdfShare').addEventListener('click', () => {
+      shareLink('CV · Giss Rodríguez', location.origin + '/cv.pdf');
+    });
+
+    // Enlaces compartidos: #foto-<id> abre la foto ampliada; #cv-cine|moda|formacion abre esa pestaña.
+    function openFromHash() {
+      const hash = decodeURIComponent(location.hash.slice(1));
+      if (hash.startsWith('foto-')) {
+        const item = portfolioGrid.querySelector(`.portfolio-item[data-photo-id="${CSS.escape(hash.slice(5))}"]`);
+        document.getElementById('portfolio').scrollIntoView();
+        if (item) openLightbox(item);
+      } else if (hash.startsWith('cv-')) {
+        const tab = Object.keys(CV_SLUGS).find(k => CV_SLUGS[k] === hash.slice(3));
+        const btn = tab && document.querySelector(`.cv-tab-btn[data-tab="${tab}"]`);
+        if (btn) btn.click();
+        settleScroll(document.getElementById('curriculum'));
+      }
+    }
+
+    // Las fotos de arriba van cargando y empujan el CV hacia abajo: recolocamos unas cuantas veces
+    // hasta que la página se asienta, salvo que la persona ya se haya puesto a hacer scroll.
+    function settleScroll(target) {
+      let cancelled = false;
+      const cancel = () => { cancelled = true; };
+      ['wheel', 'touchstart', 'keydown'].forEach(ev => window.addEventListener(ev, cancel, { once: true, passive: true }));
+      const go = () => { if (!cancelled) target.scrollIntoView({ behavior: 'instant', block: 'start' }); };
+      go();
+      [300, 800, 1500, 2500, 4000].forEach(ms => setTimeout(go, ms));
+    }
+    window.addEventListener('hashchange', openFromHash);
 
     // ===================== CV (datos) =====================
     // El CV se gestiona desde el panel /gestion. Si la API fallara, se usa data/cv.json.

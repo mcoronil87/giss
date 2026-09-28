@@ -3,5 +3,10 @@
     "api/cv-pdf.js": {
       "includeFiles": "fonts/**"
     }
-  }
+  },
+  "rewrites": [
+    { "source": "/foto/:id", "destination": "/api/share?photo=:id" },
+    { "source": "/cv/:section", "destination": "/api/share?cv=:section" },
+    { "source": "/cv.pdf", "destination": "/api/cv-pdf" }
+  ]
 }

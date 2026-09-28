@@ -9,7 +9,7 @@ export async function GET(request) {
     return new Response(bytes, {
       headers: {
         'content-type': 'application/pdf',
-        'content-disposition': 'attachment; filename="cv-giss-rodriguez.pdf"',
+        'content-disposition': 'inline; filename="cv-giss-rodriguez.pdf"',
         // La CDN lo guarda 1 minuto: siempre al día y sin generarlo en cada descarga.
         'cache-control': 'public, no-cache',
         'vercel-cdn-cache-control': 'max-age=60, stale-while-revalidate=600',
