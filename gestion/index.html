@@ -354,24 +354,12 @@
             <div class="switch-row">
               <div>
                 <span class="label"><span class="step">6</span>Añadir también al CV</span>
-                <p class="hint">Aparecerá en el apartado CV de la web y en el PDF.</p>
+                <p class="hint">Aparecerá en «Moda y Publicidad» del CV de la web y del PDF.</p>
               </div>
               <button type="button" class="switch" id="cvToggle" role="switch" aria-checked="true" aria-label="Añadir también al CV"></button>
             </div>
             <div class="cv-extra" id="cvExtra">
               <div class="cv-preview" id="cvPreview"></div>
-              <div class="field">
-                <span class="label">Apartado del CV</span>
-                <div class="segmented" id="cvNewSection">
-                  <button type="button" data-value="fashion" aria-pressed="true">Moda y Publicidad</button>
-                  <button type="button" data-value="film" aria-pressed="false">Cine y TV</button>
-                </div>
-              </div>
-              <div class="field">
-                <label class="label" for="cvNewName">Nombre en el CV</label>
-                <input class="input" id="cvNewName" type="text" maxlength="120" autocomplete="off">
-                <p class="hint">Por defecto, el mismo nombre de la campaña.</p>
-              </div>
               <div class="field">
                 <label class="label" for="cvNewYear">Año</label>
                 <select class="input" id="cvNewYear"></select>
@@ -434,15 +422,16 @@
 
     // ===================== CONFIGURACIÓN =====================
     // Puestos en los dos idiomas: la web muestra el portfolio en inglés y el CV en ambos.
-    // Los 6 primeros salen como «Más habituales».
+    // Los 6 primeros son los de moda: son los únicos que salen al subir o editar trabajos del portfolio
+    // y en «Moda y Publicidad». En «Cine y TV» salen todos.
     const ROLES = [
       { es: 'Artista de maquillaje y peluquería', en: 'Make Up & Hair Artist' },
       { es: 'Artista de maquillaje', en: 'Make Up Artist' },
       { es: 'Peluquera', en: 'Hair Stylist' },
       { es: 'Ayudante maquillaje y peluquería', en: 'Make Up & Hair Assistant' },
       { es: 'Ayudante de maquillaje', en: 'Make Up Assistant' },
-      { es: 'Jefa de maquillaje y peluquería', en: 'Head of Make Up & Hair' },
       { es: 'Ayudante de maquillaje y manicura', en: 'Make Up Assistant & Manicure' },
+      { es: 'Jefa de maquillaje y peluquería', en: 'Head of Make Up & Hair' },
       { es: 'Diseñadora de maquillaje y peluquería', en: 'Make Up & Hair Designer' },
       { es: 'Refuerzo de maquillaje', en: 'Make Up Support' },
       { es: 'Refuerzo maquillaje y peluquería', en: 'Make Up & Hair Support' },
@@ -768,12 +757,15 @@
     }
 
     // Selector de puesto (bilingüe). initial: { es, en } o el texto en inglés del portfolio.
-    function rolePicker(initial, onChange) {
+    const FASHION_ROLES = 6;
+    function rolePicker(initial, onChange, all = false) {
       const select = el('select', { class: 'input' });
-      const common = el('optgroup', { label: 'Más habituales' });
+      const common = el('optgroup', { label: 'Moda' });
       const others = el('optgroup', { label: 'Otros puestos' });
-      ROLES.forEach((r, i) => (i < 6 ? common : others).append(el('option', { value: String(i), text: r.es })));
-      select.append(el('option', { value: '', text: 'Elige el puesto…' }), common, others, el('option', { value: 'other', text: 'Otro (escribirlo)…' }));
+      ROLES.forEach((r, i) => (i < FASHION_ROLES ? common : others).append(el('option', { value: String(i), text: r.es })));
+      select.append(el('option', { value: '', text: 'Elige el puesto…' }));
+      if (all) select.append(common, others); else select.append(...common.children);
+      select.append(el('option', { value: 'other', text: 'Otro (escribirlo)…' }));
       const es = el('input', { class: 'input', type: 'text', maxlength: '100', placeholder: 'Puesto en español' });
       const en = el('input', { class: 'input', type: 'text', maxlength: '100', placeholder: 'En inglés (opcional)' });
       const otherBox = el('div', { class: 'other-box' }, es, en);
@@ -796,7 +788,7 @@
         select.value = ''; es.value = ''; en.value = '';
         if (value) {
           const v = typeof value === 'string' ? { es: null, en: value } : value;
-          const i = ROLES.findIndex((r) => (v.es ? r.es === v.es && r.en === v.en : r.en === v.en));
+          const i = ROLES.findIndex((r, n) => (all || n < FASHION_ROLES) && (v.es ? r.es === v.es && r.en === v.en : r.en === v.en));
           if (i > -1) select.value = String(i);
           else { select.value = 'other'; es.value = v.es || v.en || ''; en.value = v.en || ''; }
         }
@@ -851,8 +843,6 @@
 
     // --- Interruptor «Añadir también al CV» ---
     let cvToggleTouched = false;   // si lo toca a mano, ya no lo cambiamos solos
-    let cvNameTouched = false;
-    let cvNewSection = 'fashion';
     fillYears($('cvNewYear'));
     const cvToggleOn = () => $('cvToggle').getAttribute('aria-checked') === 'true';
     function setCvToggle(on) {
@@ -860,15 +850,13 @@
       $('cvExtra').hidden = !on;
     }
     $('cvToggle').addEventListener('click', () => { cvToggleTouched = true; setCvToggle(!cvToggleOn()); });
-    bindSegmented($('cvNewSection'), (v) => { cvNewSection = v; renderCvPreview(); });
-    $('cvNewName').addEventListener('input', () => { cvNameTouched = true; renderCvPreview(); });
     $('cvNewYear').addEventListener('change', renderCvPreview);
 
     function renderCvPreview() {
       const role = newRole.get();
-      const name = $('cvNewName').value.trim() || $('newName').value.trim();
+      const name = $('newName').value.trim();
       $('cvPreview').replaceChildren(
-        el('div', { class: 'kicker', text: `Así aparecerá · ${CV_LABEL[cvNewSection]} · ${$('cvNewYear').value}` }),
+        el('div', { class: 'kicker', text: `Así aparecerá · ${CV_LABEL.fashion} · ${$('cvNewYear').value}` }),
         el('div', { class: 'p', text: name || 'Nombre de la campaña' }),
         el('div', { class: 'r', text: role ? role.es : 'Tu puesto' }),
       );
@@ -882,14 +870,11 @@
     $('newName').addEventListener('input', () => {
       $('err-name').hidden = true;
       $('newName').classList.remove('invalid');
-      if (!cvNameTouched) $('cvNewName').value = $('newName').value;
       renderCvPreview();
     });
 
     function resetCvExtra() {
-      cvToggleTouched = false; cvNameTouched = false; cvNewSection = 'fashion';
-      setSegmented($('cvNewSection'), 'fashion');
-      $('cvNewName').value = '';
+      cvToggleTouched = false;
       fillYears($('cvNewYear'));
       setCvToggle(true);
       renderCvPreview();
@@ -936,9 +921,9 @@
         if (cvToggleOn()) {
           setProgress(photos.length, photos.length, 'Añadiendo al CV…');
           try {
-            insertCvLine(cvNewSection, {
+            insertCvLine('fashion', {
               id: uid(), year: Number($('cvNewYear').value),
-              project: $('cvNewName').value.trim() || name, role: roleObj,
+              project: name, role: roleObj,
             });
             await saveCvNow();
             message = `«${name}» publicada y añadida al CV. Se verá en la web en menos de un minuto.`;
@@ -1279,7 +1264,7 @@
         };
       } else {
         const project = el('input', { class: 'input', type: 'text', maxlength: '120', value: existing ? existing.project : '', placeholder: section === 'film' ? 'Ej.: Marea Negra 4' : 'Ej.: Zara SS27' });
-        const role = rolePicker(existing ? existing.role : null);
+        const role = rolePicker(existing ? existing.role : null, null, section === 'film');
         const year = el('select', { class: 'input' });
         fillYears(year, existing ? existing.year : THIS_YEAR);
         fields = [
