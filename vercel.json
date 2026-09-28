@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/cv-pdf.js": {
+      "includeFiles": "fonts/**"
+    }
+  }
+}

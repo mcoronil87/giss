@@ -1,0 +1,424 @@
+{
+  "version": 1,
+  "updatedAt": "2026-09-27T00:00:00.000Z",
+  "campaigns": [
+    {
+      "id": "c01",
+      "name": "ELLE Magazine Polska SS24",
+      "role": "Make Up & Hair Artist",
+      "category": "fashion",
+      "photos": [
+        {
+          "url": "/images_webp/ELLE%20Magazine%20Polska%20SS24%20%281%29.webp"
+        },
+        {
+          "url": "/images_webp/ELLE%20Magazine%20Polska%20SS24%20%282%29.webp"
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "name": "Primark Summer SS26",
+      "role": "Hair Stylist",
+      "category": "fashion",
+      "photos": [
+        {
+          "url": "/images_webp/Primark%20Summer%20SS26%20%281%29.webp"
+        },
+        {
+          "url": "/images_webp/Primark%20Summer%20SS26%20%282%29.webp"
+        },
+        {
+          "url": "/images_webp/Primark%20Summer%20SS26%20%283%29.webp"
+        },
+        {
+          "url": "/images_webp/Primark%20Summer%20SS26%20%284%29.webp"
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "name": "Reserved 2026",
+      "role": "Make Up & Hair Artist",
+      "category": "fashion",
+      "photos": [
+        {
+          "url": "/images_webp/Reserved%202026%20%281%29.webp"
+        },
+        {
+          "url": "/images_webp/Reserved%202026%20%282%29.webp"
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "name": "Pull & Bear",
+      "role": "Make Up & Hair Artist",
+      "category": "fashion",
+      "photos": [
+        {
+          "url": "/images_webp/Pull%20and%20Bear%20%281%29.webp"
+        },
+        {
+          "url": "/images_webp/Pull%20and%20Bear%20%282%29.webp"
+        },
+        {
+          "url": "/images_webp/Pull%20and%20Bear%20%283%29.webp"
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "name": "Vycher",
+      "role": "Make Up & Hair Artist",
+      "category": "fashion",
+      "photos": [
+        {
+          "url": "/images_webp/Vycher%20%281%29.webp"
+        },
+        {
+          "url": "/images_webp/Vycher%20%282%29.webp"
+        },
+        {
+          "url": "/images_webp/Vycher%20%283%29.webp"
+        }
+      ]
+    },
+    {
+      "id": "c06",
+      "name": "Kazar",
+      "role": "Make Up Artist",
+      "category": "fashion",
+      "photos": [
+        {
+          "url": "/images_webp/Kazar%20%281%29.webp"
+        },
+        {
+          "url": "/images_webp/Kazar%20%282%29.webp"
+        },
+        {
+          "url": "/images_webp/Kazar%20%283%29.webp"
+        },
+        {
+          "url": "/images_webp/Kazar%20%284%29.webp"
+        },
+        {
+          "url": "/images_webp/Kazar%20%285%29.webp"
+        },
+        {
+          "url": "/images_webp/Kazar%20%286%29.webp"
+        },
+        {
+          "url": "/images_webp/Kazar%20%287%29.webp"
+        },
+        {
+          "url": "/images_webp/Kazar%20%288%29.webp"
+        }
+      ]
+    },
+    {
+      "id": "c07",
+      "name": "Nuria Ferrer Swimwear",
+      "role": "Make Up & Hair Artist",
+      "category": "fashion",
+      "photos": [
+        {
+          "url": "/images_webp/Nuria%20Ferrer%20Swimwear.webp"
+        }
+      ]
+    },
+    {
+      "id": "c08",
+      "name": "Schön Magazine",
+      "role": "Make Up & Hair Artist",
+      "category": "fashion",
+      "photos": [
+        {
+          "url": "/images_webp/Schon%20Magazine%20%281%29.webp"
+        },
+        {
+          "url": "/images_webp/Schon%20Magazine%20%282%29.webp"
+        },
+        {
+          "url": "/images_webp/Schon%20Magazine%20%283%29.webp"
+        }
+      ]
+    },
+    {
+      "id": "c09",
+      "name": "Thèoro",
+      "role": "Make Up & Hair Artist",
+      "category": "fashion",
+      "photos": [
+        {
+          "url": "/images_webp/Theoro%20%281%29.webp"
+        },
+        {
+          "url": "/images_webp/Theoro%20%282%29.webp"
+        },
+        {
+          "url": "/images_webp/Theoro%20%283%29.webp"
+        }
+      ]
+    },
+    {
+      "id": "c10",
+      "name": "Próchnik",
+      "role": "Make Up & Hair Artist",
+      "category": "fashion",
+      "photos": [
+        {
+          "url": "/images_webp/Prochnick.webp"
+        }
+      ]
+    },
+    {
+      "id": "c11",
+      "name": "ELLE Magazine Polska SS24",
+      "role": "Make Up & Hair Artist",
+      "category": "fashion",
+      "photos": [
+        {
+          "url": "/images_webp/ELLE%20Magazine%20Polska%20SS24%20%283%29.webp"
+        },
+        {
+          "url": "/images_webp/ELLE%20Magazine%20Polska%20SS24%20%284%29.webp"
+        },
+        {
+          "url": "/images_webp/ELLE%20Magazine%20Polska%20SS24%20%285%29.webp"
+        }
+      ]
+    },
+    {
+      "id": "c12",
+      "name": "Lancerto Woman SS25",
+      "role": "Make Up & Hair Artist",
+      "category": "fashion",
+      "photos": [
+        {
+          "url": "/images_webp/Lancerto%20Woman%20SS25%20%281%29.webp"
+        },
+        {
+          "url": "/images_webp/Lancerto%20Woman%20SS25%20%282%29.webp"
+        },
+        {
+          "url": "/images_webp/Lancerto%20Woman%20SS25%20%283%29.webp"
+        }
+      ]
+    },
+    {
+      "id": "c13",
+      "name": "Lancerto Man SS25",
+      "role": "Make Up & Hair Artist",
+      "category": "fashion",
+      "photos": [
+        {
+          "url": "/images_webp/Lancerto%20Man%20SS25%20%281%29.webp"
+        },
+        {
+          "url": "/images_webp/Lancerto%20Man%20SS25%20%282%29.webp"
+        }
+      ]
+    },
+    {
+      "id": "c14",
+      "name": "Próchnik SS25",
+      "role": "Make Up & Hair Artist",
+      "category": "fashion",
+      "photos": [
+        {
+          "url": "/images_webp/Prochnik%20SS25%20%281%29.webp"
+        },
+        {
+          "url": "/images_webp/Prochnik%20SS25%20%282%29.webp"
+        }
+      ]
+    },
+    {
+      "id": "c15",
+      "name": "Ferrari SS24",
+      "role": "Make Up Assistant & Manicure",
+      "category": "fashion",
+      "photos": [
+        {
+          "url": "/images_webp/Ferrari%20SS24%20%281%29.webp"
+        },
+        {
+          "url": "/images_webp/Ferrari%20SS24%20%282%29.webp"
+        }
+      ]
+    },
+    {
+      "id": "c16",
+      "name": "ADD Milano SS24",
+      "role": "Make Up & Hair Artist",
+      "category": "fashion",
+      "photos": [
+        {
+          "url": "/images_webp/ADD%20Milano%20SS24%20%281%29.webp"
+        },
+        {
+          "url": "/images_webp/ADD%20Milano%20SS24%20%282%29.webp"
+        },
+        {
+          "url": "/images_webp/ADD%20Milano%20SS24%20%283%29.webp"
+        }
+      ]
+    },
+    {
+      "id": "c17",
+      "name": "Lebrand SS24",
+      "role": "Make Up & Hair Artist",
+      "category": "fashion",
+      "photos": [
+        {
+          "url": "/images_webp/Lebrand%20SS24%20%281%29.webp"
+        },
+        {
+          "url": "/images_webp/Lebrand%20SS24%20%282%29.webp"
+        },
+        {
+          "url": "/images_webp/Lebrand%20SS24%20%283%29.webp"
+        },
+        {
+          "url": "/images_webp/Lebrand%20SS24%20%284%29.webp"
+        },
+        {
+          "url": "/images_webp/Lebrand%20SS24%20%285%29.webp"
+        }
+      ]
+    },
+    {
+      "id": "c18",
+      "name": "Lebrand SS24 · Wysokieobcasy Magazine",
+      "role": "Make Up & Hair Artist",
+      "category": "fashion",
+      "photos": [
+        {
+          "url": "/images_webp/Lebrand%20SS24%2C%20Wysokieobcasy%20Magazine%20%281%29.webp"
+        },
+        {
+          "url": "/images_webp/Lebrand%20SS24%2C%20Wysokieobcasy%20Magazine%20%282%29.webp"
+        }
+      ]
+    },
+    {
+      "id": "c19",
+      "name": "Chandon SS24",
+      "role": "Make Up & Hair Assistant",
+      "category": "fashion",
+      "photos": [
+        {
+          "url": "/images_webp/Chandon%20SS24%20%281%29.webp"
+        },
+        {
+          "url": "/images_webp/Chandon%20SS24%20%282%29.webp"
+        },
+        {
+          "url": "/images_webp/Chandon%20SS24%20%283%29.webp"
+        }
+      ]
+    },
+    {
+      "id": "c20",
+      "name": "Merrel SS24",
+      "role": "Make Up & Hair Assistant",
+      "category": "fashion",
+      "photos": [
+        {
+          "url": "/images_webp/Merrel%20SS24.webp"
+        }
+      ]
+    },
+    {
+      "id": "c21",
+      "name": "Cyrana SS23",
+      "role": "Make Up & Hair Artist",
+      "category": "fashion",
+      "photos": [
+        {
+          "url": "/images_webp/Cyrana%20SS23%20%281%29.webp"
+        },
+        {
+          "url": "/images_webp/Cyrana%20SS23%20%282%29.webp"
+        },
+        {
+          "url": "/images_webp/Cyrana%20SS23%20%283%29.webp"
+        }
+      ]
+    },
+    {
+      "id": "c22",
+      "name": "Liu-Jo SS23",
+      "role": "Make Up Assistant",
+      "category": "fashion",
+      "photos": [
+        {
+          "url": "/images_webp/Liu-Jo%20SS23.webp"
+        }
+      ]
+    },
+    {
+      "id": "c23",
+      "name": "Portraits",
+      "role": "Make Up & Hair Artist",
+      "category": "portraits",
+      "photos": [
+        {
+          "url": "/images_webp/model%20%281%29.webp"
+        },
+        {
+          "url": "/images_webp/model%20%282%29.webp"
+        },
+        {
+          "url": "/images_webp/model%20%283%29.webp"
+        },
+        {
+          "url": "/images_webp/model%20%284%29.webp"
+        },
+        {
+          "url": "/images_webp/model%20%285%29.webp"
+        },
+        {
+          "url": "/images_webp/model%20%286%29.webp"
+        },
+        {
+          "url": "/images_webp/model%20%287%29.webp"
+        },
+        {
+          "url": "/images_webp/model%20%288%29.webp"
+        },
+        {
+          "url": "/images_webp/model%20%289%29.webp"
+        },
+        {
+          "url": "/images_webp/model%20%2810%29.webp"
+        },
+        {
+          "url": "/images_webp/model%20%2811%29.webp"
+        },
+        {
+          "url": "/images_webp/model%20%2812%29.webp"
+        },
+        {
+          "url": "/images_webp/model%20%2813%29.webp"
+        },
+        {
+          "url": "/images_webp/model%20%2814%29.webp"
+        },
+        {
+          "url": "/images_webp/model%20%2815%29.webp"
+        },
+        {
+          "url": "/images_webp/model%20%2816%29.webp"
+        },
+        {
+          "url": "/images_webp/model%20%2817%29.webp"
+        },
+        {
+          "url": "/images_webp/model%20%2818%29.webp"
+        }
+      ]
+    }
+  ]
+}
