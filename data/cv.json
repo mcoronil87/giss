@@ -1,0 +1,833 @@
+{
+  "version": 1,
+  "updatedAt": "2026-09-28T00:00:00.000Z",
+  "film": [
+    {
+      "id": "l001",
+      "year": 2026,
+      "project": "Outono",
+      "role": {
+        "es": "Ayudante maquillaje y peluquería",
+        "en": "Make Up & Hair Assistant"
+      }
+    },
+    {
+      "id": "l002",
+      "year": 2026,
+      "project": "This Wild Things",
+      "role": {
+        "es": "Maquillaje y peluquería de extras",
+        "en": "Make Up & Hair Crowd"
+      }
+    },
+    {
+      "id": "l003",
+      "year": 2026,
+      "project": "Dos Días",
+      "role": {
+        "es": "Maquillaje y peluquería",
+        "en": "Make Up & Hair"
+      }
+    },
+    {
+      "id": "l004",
+      "year": 2026,
+      "project": "Ardora",
+      "role": {
+        "es": "Refuerzo maquillaje y peluquería",
+        "en": "Make Up & Hair Support"
+      }
+    },
+    {
+      "id": "l005",
+      "year": 2026,
+      "project": "Lobo",
+      "role": {
+        "es": "Refuerzo de maquillaje",
+        "en": "Make Up Support"
+      }
+    },
+    {
+      "id": "l006",
+      "year": 2025,
+      "project": "These Sacred Vows",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l007",
+      "year": 2025,
+      "project": "Monstro",
+      "role": {
+        "es": "Diseñadora de maquillaje y peluquería",
+        "en": "Make Up & Hair Designer"
+      }
+    },
+    {
+      "id": "l008",
+      "year": 2025,
+      "project": "Lapso",
+      "role": {
+        "es": "Artista de maquillaje",
+        "en": "Make Up Artist"
+      }
+    },
+    {
+      "id": "l009",
+      "year": 2025,
+      "project": "A Nadadora",
+      "role": {
+        "es": "Refuerzo maquillaje y peluquería",
+        "en": "Make Up & Hair Support"
+      }
+    },
+    {
+      "id": "l010",
+      "year": 2024,
+      "project": "Romería",
+      "role": {
+        "es": "Maquilladora / Ayudante de maquillaje",
+        "en": "Make Up Artist / Assistant"
+      }
+    },
+    {
+      "id": "l011",
+      "year": 2024,
+      "project": "Punto Nemo",
+      "role": {
+        "es": "Ayudante de maquillaje",
+        "en": "Make Up Assistant"
+      }
+    },
+    {
+      "id": "l012",
+      "year": 2024,
+      "project": "Road Trip",
+      "role": {
+        "es": "Refuerzo maquillaje y peluquería",
+        "en": "Make Up & Hair Support"
+      }
+    },
+    {
+      "id": "l013",
+      "year": 2024,
+      "project": "Stags",
+      "role": {
+        "es": "Refuerzo de maquillaje",
+        "en": "Make Up Support"
+      }
+    },
+    {
+      "id": "l014",
+      "year": 2024,
+      "project": "The Island",
+      "role": {
+        "es": "Coordinadora maquillaje/peluquería de figuración",
+        "en": "Make Up & Hair Coordinator (Extras)"
+      }
+    },
+    {
+      "id": "l015",
+      "year": 2023,
+      "project": "Marea Negra 3",
+      "role": {
+        "es": "Ayudante de maquillaje",
+        "en": "Make Up Assistant"
+      }
+    },
+    {
+      "id": "l016",
+      "year": 2023,
+      "project": "Alumbramiento",
+      "role": {
+        "es": "Refuerzo de maquillaje",
+        "en": "Make Up Support"
+      }
+    },
+    {
+      "id": "l017",
+      "year": 2023,
+      "project": "El Caso Asunta",
+      "role": {
+        "es": "Refuerzo de maquillaje",
+        "en": "Make Up Support"
+      }
+    },
+    {
+      "id": "l018",
+      "year": 2023,
+      "project": "Eine Billion Dollar",
+      "role": {
+        "es": "Refuerzo maquillaje y peluquería",
+        "en": "Make Up & Hair Support"
+      }
+    },
+    {
+      "id": "l019",
+      "year": 2023,
+      "project": "Then of Thieves",
+      "role": {
+        "es": "Refuerzo de maquillaje",
+        "en": "Make Up Support"
+      }
+    },
+    {
+      "id": "l020",
+      "year": 2023,
+      "project": "Allmen ud das Geheimnis des Koi",
+      "role": {
+        "es": "Refuerzo de maquillaje",
+        "en": "Make Up Support"
+      }
+    },
+    {
+      "id": "l021",
+      "year": 2023,
+      "project": "Rich Flu",
+      "role": {
+        "es": "Refuerzo de maquillaje",
+        "en": "Make Up Support"
+      }
+    },
+    {
+      "id": "l022",
+      "year": 2022,
+      "project": "Marea Negra 2",
+      "role": {
+        "es": "Ayudante maquillaje y peluquería",
+        "en": "Make Up & Hair Assistant"
+      }
+    },
+    {
+      "id": "l023",
+      "year": 2022,
+      "project": "A Town Called Malice",
+      "role": {
+        "es": "Refuerzo de maquillaje",
+        "en": "Make Up Support"
+      }
+    },
+    {
+      "id": "l024",
+      "year": 2022,
+      "project": "Foundation 2",
+      "role": {
+        "es": "Refuerzo de maquillaje",
+        "en": "Make Up Support"
+      }
+    },
+    {
+      "id": "l025",
+      "year": 2022,
+      "project": "American Star",
+      "role": {
+        "es": "Artista adicional de maquillaje y peluquería",
+        "en": "Additional Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l026",
+      "year": 2021,
+      "project": "Rapa",
+      "role": {
+        "es": "Refuerzo de maquillaje",
+        "en": "Make Up Support"
+      }
+    },
+    {
+      "id": "l027",
+      "year": 2021,
+      "project": "Marea Negra 1",
+      "role": {
+        "es": "Ayudante maquillaje y peluquería",
+        "en": "Make Up & Hair Assistant"
+      }
+    },
+    {
+      "id": "l028",
+      "year": 2021,
+      "project": "Monstro",
+      "role": {
+        "es": "Jefa de maquillaje y peluquería",
+        "en": "Head of Make Up & Hair"
+      }
+    },
+    {
+      "id": "l029",
+      "year": 2020,
+      "project": "Fun Polo Aire (T1–T4)",
+      "role": {
+        "es": "Jefa de maquillaje y peluquería",
+        "en": "Head of Make Up & Hair"
+      }
+    },
+    {
+      "id": "l030",
+      "year": 2020,
+      "project": "O Sabedoiro",
+      "role": {
+        "es": "Jefa de maquillaje y peluquería",
+        "en": "Head of Make Up & Hair"
+      }
+    },
+    {
+      "id": "l031",
+      "year": 2020,
+      "project": "Tres Caminos",
+      "role": {
+        "es": "Ayudante maquillaje y peluquería",
+        "en": "Make Up & Hair Assistant"
+      }
+    },
+    {
+      "id": "l032",
+      "year": 2019,
+      "project": "Dónde Estabas Entonces",
+      "role": {
+        "es": "Maquillaje y peluquería",
+        "en": "Make Up & Hair"
+      }
+    },
+    {
+      "id": "l033",
+      "year": 2019,
+      "project": "A Espía",
+      "role": {
+        "es": "Refuerzo de maquillaje",
+        "en": "Make Up Support"
+      }
+    },
+    {
+      "id": "l034",
+      "year": 2018,
+      "project": "La Sombra de la Ley",
+      "role": {
+        "es": "Refuerzo maquillaje y peluquería",
+        "en": "Make Up & Hair Support"
+      }
+    },
+    {
+      "id": "l035",
+      "year": 2018,
+      "project": "Limbo",
+      "role": {
+        "es": "Jefa de maquillaje y peluquería",
+        "en": "Head of Make Up & Hair"
+      }
+    },
+    {
+      "id": "l036",
+      "year": 2018,
+      "project": "Antes de Perder",
+      "role": {
+        "es": "Ayudante maquillaje y peluquería",
+        "en": "Make Up & Hair Assistant"
+      }
+    },
+    {
+      "id": "l037",
+      "year": 2018,
+      "project": "Serramoura",
+      "role": {
+        "es": "Ayudante de maquillaje",
+        "en": "Make Up Assistant"
+      }
+    },
+    {
+      "id": "l038",
+      "year": 2017,
+      "project": "Vivir sin Permiso",
+      "role": {
+        "es": "Ayudante maquillaje y peluquería",
+        "en": "Make Up & Hair Assistant"
+      }
+    },
+    {
+      "id": "l039",
+      "year": 2017,
+      "project": "Viradeira",
+      "role": {
+        "es": "Ayudante de maquillaje",
+        "en": "Make Up Assistant"
+      }
+    },
+    {
+      "id": "l040",
+      "year": 2017,
+      "project": "Yucatán",
+      "role": {
+        "es": "Refuerzo de maquillaje",
+        "en": "Make Up Support"
+      }
+    },
+    {
+      "id": "l041",
+      "year": 2016,
+      "project": "Lobos e Cordeiros",
+      "role": {
+        "es": "Ayudante de maquillaje",
+        "en": "Make Up Assistant"
+      }
+    },
+    {
+      "id": "l042",
+      "year": 2016,
+      "project": "El Final del Camino",
+      "role": {
+        "es": "Auxiliar maquillaje y peluquería",
+        "en": "Make Up & Hair Auxiliary"
+      }
+    },
+    {
+      "id": "l043",
+      "year": 2015,
+      "project": "Acariciea Poupette",
+      "role": {
+        "es": "Jefa de maquillaje y peluquería",
+        "en": "Head of Make Up & Hair"
+      }
+    },
+    {
+      "id": "l044",
+      "year": 2015,
+      "project": "Amor na Rede",
+      "role": {
+        "es": "Jefa de maquillaje y peluquería",
+        "en": "Head of Make Up & Hair"
+      }
+    },
+    {
+      "id": "l045",
+      "year": 2014,
+      "project": "Todo Cambia",
+      "role": {
+        "es": "Jefa de maquillaje y peluquería",
+        "en": "Head of Make Up & Hair"
+      }
+    }
+  ],
+  "fashion": [
+    {
+      "id": "l046",
+      "year": 2026,
+      "project": "Primark Summer",
+      "role": {
+        "es": "Peluquera",
+        "en": "Hair Artist"
+      }
+    },
+    {
+      "id": "l047",
+      "year": 2026,
+      "project": "Pull & Bear",
+      "role": {
+        "es": "Maquillaje y peluquería",
+        "en": "Make Up & Hair"
+      }
+    },
+    {
+      "id": "l048",
+      "year": 2026,
+      "project": "Reserved",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l049",
+      "year": 2026,
+      "project": "Kazar",
+      "role": {
+        "es": "Artista de maquillaje",
+        "en": "Make Up Artist"
+      }
+    },
+    {
+      "id": "l050",
+      "year": 2026,
+      "project": "Lancerto Man",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l051",
+      "year": 2026,
+      "project": "Lancerto Woman",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l052",
+      "year": 2026,
+      "project": "Próchnik SS26",
+      "role": {
+        "es": "Artista de maquillaje",
+        "en": "Make Up Artist"
+      }
+    },
+    {
+      "id": "l053",
+      "year": 2026,
+      "project": "Vivamos Como Galegos",
+      "role": {
+        "es": "Jefa de maquillaje y peluquería",
+        "en": "Head of Make Up & Hair"
+      }
+    },
+    {
+      "id": "l054",
+      "year": 2026,
+      "project": "Larsa",
+      "role": {
+        "es": "Jefa de maquillaje y peluquería",
+        "en": "Head of Make Up & Hair"
+      }
+    },
+    {
+      "id": "l055",
+      "year": 2026,
+      "project": "Bacardi Cola",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l056",
+      "year": 2026,
+      "project": "Nuria Ferrer Swimwear",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l057",
+      "year": 2026,
+      "project": "Schön Magazine",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l058",
+      "year": 2026,
+      "project": "Thèoro",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l059",
+      "year": 2025,
+      "project": "Zalando SS25 (Glam Team)",
+      "role": {
+        "es": "Ayudante de maquillaje",
+        "en": "Make Up Assistant"
+      }
+    },
+    {
+      "id": "l060",
+      "year": 2025,
+      "project": "Zalando Vans SS25",
+      "role": {
+        "es": "Ayudante de maquillaje y peluquería",
+        "en": "Make Up & Hair Assistant"
+      }
+    },
+    {
+      "id": "l061",
+      "year": 2025,
+      "project": "Coca-Cola Bacardi SS25",
+      "role": {
+        "es": "Ayudante de maquillaje",
+        "en": "Make Up Assistant"
+      }
+    },
+    {
+      "id": "l062",
+      "year": 2025,
+      "project": "Lancerto Man SS25",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l063",
+      "year": 2025,
+      "project": "Lancerto Woman SS25",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l064",
+      "year": 2025,
+      "project": "Uniqla Leche SS25",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l065",
+      "year": 2025,
+      "project": "Aida Cruceros",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l066",
+      "year": 2024,
+      "project": "Aida Cruceros",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l067",
+      "year": 2024,
+      "project": "ELLE Magazine Cover (Elle Polska, April)",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l068",
+      "year": 2024,
+      "project": "Lebrand SS24",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l069",
+      "year": 2024,
+      "project": "ADD Milano SS24",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l070",
+      "year": 2024,
+      "project": "Ferrari Collection",
+      "role": {
+        "es": "Ayudante de maquillaje",
+        "en": "Make Up Assistant"
+      }
+    },
+    {
+      "id": "l071",
+      "year": 2024,
+      "project": "Merrel",
+      "role": {
+        "es": "Ayudante de maquillaje y peluquería",
+        "en": "Make Up & Hair Assistant"
+      }
+    },
+    {
+      "id": "l072",
+      "year": 2024,
+      "project": "Rodrigo Cuevas y Caamaño Amexeiras",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l073",
+      "year": 2023,
+      "project": "Liu-Jo Collection",
+      "role": {
+        "es": "Ayudante de maquillaje",
+        "en": "Make Up Assistant"
+      }
+    },
+    {
+      "id": "l074",
+      "year": 2023,
+      "project": "Chandon",
+      "role": {
+        "es": "Ayudante de maquillaje y peluquería",
+        "en": "Make Up & Hair Assistant"
+      }
+    },
+    {
+      "id": "l075",
+      "year": 2023,
+      "project": "Saudí Events",
+      "role": {
+        "es": "Ayudante de maquillaje y peluquería",
+        "en": "Make Up & Hair Assistant"
+      }
+    },
+    {
+      "id": "l076",
+      "year": 2022,
+      "project": "Punjabi Disco Spain Da",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l077",
+      "year": 2022,
+      "project": "A Pantalla",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l078",
+      "year": 2021,
+      "project": "Nova Galega de Danza",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l079",
+      "year": 2021,
+      "project": "Vegalsa",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l080",
+      "year": 2021,
+      "project": "Si Talía Fuera Ciega",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l081",
+      "year": 2020,
+      "project": "Campofrío Navidad",
+      "role": {
+        "es": "Ayudante de maquillaje y peluquería",
+        "en": "Make Up & Hair Assistant"
+      }
+    },
+    {
+      "id": "l082",
+      "year": 2019,
+      "project": "Friulio",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l083",
+      "year": 2019,
+      "project": "Albo",
+      "role": {
+        "es": "Ayudante de maquillaje",
+        "en": "Make Up Assistant"
+      }
+    },
+    {
+      "id": "l084",
+      "year": 2018,
+      "project": "Stoned at Pompei",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l085",
+      "year": 2018,
+      "project": "Eroski",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    },
+    {
+      "id": "l086",
+      "year": 2018,
+      "project": "Acnur",
+      "role": {
+        "es": "Ayudante de maquillaje y peluquería",
+        "en": "Make Up & Hair Assistant"
+      }
+    },
+    {
+      "id": "l087",
+      "year": 2018,
+      "project": "Ellalarabia",
+      "role": {
+        "es": "Artista de maquillaje y peluquería",
+        "en": "Make Up & Hair Artist"
+      }
+    }
+  ],
+  "education": [
+    {
+      "id": "l088",
+      "title": "Caracterización, Cine y TV",
+      "school": "Stick Art Studio"
+    },
+    {
+      "id": "l089",
+      "title": "Bondo, Transfers & Silicone Prosthesis",
+      "school": "Ireal FX Academy"
+    },
+    {
+      "id": "l090",
+      "title": "Posticería Facial",
+      "school": "Fent y Desfent"
+    },
+    {
+      "id": "l091",
+      "title": "Formación Completa Peluquería",
+      "school": "Escuela Nous"
+    },
+    {
+      "id": "l092",
+      "title": "Intensivo Peluquería de Época",
+      "school": "Ámparo Sánchez"
+    },
+    {
+      "id": "l093",
+      "title": "Creación y Aplicación de Prótesis",
+      "school": "4Ojos Estudio"
+    },
+    {
+      "id": "l094",
+      "title": "Peluquería de Plató",
+      "school": "Stick Art Studio"
+    },
+    {
+      "id": "l095",
+      "title": "Body Paint",
+      "school": "Stick Art Studio"
+    }
+  ]
+}

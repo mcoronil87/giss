@@ -6,6 +6,8 @@
     "node": ">=20"
   },
   "dependencies": {
-    "@vercel/blob": "^2.8.0"
+    "@pdf-lib/fontkit": "^1.1.1",
+    "@vercel/blob": "^2.8.0",
+    "pdf-lib": "^1.17.1"
   }
 }
